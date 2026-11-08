@@ -32,12 +32,14 @@ after-*.png
 **/after-*.png
 take_screenshot.js
 *.txt
+!assets/**
 !resources/**
 
 # Turbo & Cache
 .turbo/
 **/.turbo/
 .cache/
+.tmp_*
 
 # Logs
 *.log
