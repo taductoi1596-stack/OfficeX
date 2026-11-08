@@ -1,0 +1,32 @@
+{
+  "name": "@officex/desktop",
+  "version": "1.0.0",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "electron .",
+    "package": "electron-builder build --win --config electron-builder.yml"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "electron": "^30.5.1",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@officex/desktop-runtime": "workspace:*",
+    "@officex/file-system": "workspace:*",
+    "@officex/ipc": "workspace:*",
+    "@officex/platform-clipboard": "workspace:*",
+    "@officex/platform-dialogs": "workspace:*",
+    "@officex/platform-notifications": "workspace:*",
+    "@officex/recovery": "workspace:*",
+    "@officex/registry": "workspace:*",
+    "@officex/updater": "workspace:*",
+    "@officex/window-manager": "workspace:*",
+    "electron-updater": "^6.8.9",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
+  }
+}

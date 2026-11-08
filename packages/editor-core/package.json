@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "name": "@officex/editor-core",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  },
+  "main": "src/index.ts"
+}

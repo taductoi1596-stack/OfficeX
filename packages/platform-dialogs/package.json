@@ -1,0 +1,19 @@
+{
+    "name":  "@officex/platform-dialogs",
+    "version":  "1.0.0",
+    "main":  "dist/index.js",
+    "types":  "dist/index.d.ts",
+    "dependencies":  {
+                         "tsyringe":  "^4.10.0",
+                         "reflect-metadata":  "^0.2.2"
+                     },
+    "devDependencies":  {
+                            "typescript":  "^5.0.0",
+                            "electron":  "^30.5.1",
+                            "@types/node":  "^20.0.0"
+                        },
+    "scripts":  {
+                    "build":  "tsc",
+                    "dev":  "tsc --watch"
+                }
+}

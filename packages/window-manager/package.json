@@ -1,0 +1,20 @@
+{
+  "name": "@officex/window-manager",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js", "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
+  }
+}
+

@@ -1,0 +1,36 @@
+{
+  "name": "officex-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OfficeX Suite Monorepo",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --concurrency=100",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "start": "pnpm --filter @officex/desktop start",
+    "package": "pnpm run build && pnpm --filter @officex/desktop package"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "prettier": "^3.2.0",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "puppeteer": "^25.3.0",
+    "vitest": "^4.1.10"
+  }
+}

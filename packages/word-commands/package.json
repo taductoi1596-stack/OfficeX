@@ -1,0 +1,16 @@
+{
+  "name": "@officex/word-commands",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@officex/style-engine": "workspace:*",
+    "@officex/layout-engine": "workspace:*",
+    "@officex/history-engine": "workspace:*"
+  }
+}

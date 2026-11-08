@@ -1,0 +1,165 @@
+appId: com.workplace.suite
+productName: Workplace Launcher
+copyright: Copyright © 2026 Workplace Suite
+
+# Thư mục đầu ra
+directories:
+  output: "../../release"
+  buildResources: "build-resources"
+
+# File đưa vào app (từ thư mục apps/desktop)
+files:
+  # Main process compiled JS
+  - "dist/main/**/*"
+  - "dist/main/index.js"
+  # Preload
+  - "dist/main/preload.js"
+  # Renderer (Launcher UI)
+  - "dist/renderer/**/*"
+  # Package metadata
+  - "package.json"
+  # node_modules (electron-builder sẽ tự bundle đúng)
+  - "node_modules/**/*"
+  # Loại bỏ những gì không cần
+  - "!node_modules/.cache/**/*"
+  - "!node_modules/**/*.md"
+  - "!node_modules/**/*.ts"
+  - "!**/*.map"
+
+# File thêm vào ngoài asar (cần truy cập file system thực)
+extraResources:
+  # Scripts PowerShell để install/uninstall
+  - from: "../../scripts"
+    to: "scripts"
+    filter:
+      - "**/*.ps1"
+      - "**/*.cmd"
+  # Icons ứng dụng
+  - from: "../../resources/icons"
+    to: "icons"
+  - from: "../../resources/icons"
+    to: "resources/icons"
+  # Launcher app built files
+  - from: "../launcher/dist/renderer"
+    to: "launcher/dist"
+    filter: "**/*"
+  # Word app
+  - from: "../word/dist/renderer"
+    to: "word/dist"
+    filter: "**/*"
+  # Excel app  
+  - from: "../excel/dist/renderer"
+    to: "excel/dist"
+    filter: "**/*"
+  # PowerPoint app
+  - from: "../powerpoint/dist/renderer"
+    to: "powerpoint/dist"
+    filter: "**/*"
+  # AI Assistant app
+  - from: "../ai/dist/renderer"
+    to: "ai/dist"
+    filter: "**/*"
+  # Settings app
+  - from: "../settings/dist/renderer"
+    to: "settings/dist"
+    filter: "**/*"
+  # Updater app
+  - from: "../updater/dist/renderer"
+    to: "updater/dist"
+    filter: "**/*"
+  # Recovery UI app
+  - from: "../recovery-ui/dist/renderer"
+    to: "recovery-ui/dist"
+    filter: "**/*"
+
+# Windows target
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: "../../resources/icons/suite.ico"
+  requestedExecutionLevel: asInvoker
+
+# File associations for native double-click handling
+fileAssociations:
+  # Word Document Formats
+  - ext: "docx"
+    name: "Word Document"
+    description: "Workplace Word Document"
+    icon: "../../resources/icons/word.ico"
+    role: "Editor"
+  - ext: "doc"
+    name: "Word 97-2003 Document"
+    description: "Workplace Word Document"
+    icon: "../../resources/icons/word.ico"
+    role: "Editor"
+  - ext: "dotx"
+    name: "Word Template"
+    description: "Workplace Word Template"
+    icon: "../../resources/icons/word.ico"
+    role: "Editor"
+  - ext: "rtf"
+    name: "Rich Text Format"
+    description: "Workplace Word Document"
+    icon: "../../resources/icons/word.ico"
+    role: "Editor"
+
+  # Excel Spreadsheet Formats
+  - ext: "xlsx"
+    name: "Excel Workbook"
+    description: "Workplace Excel Spreadsheet"
+    icon: "../../resources/icons/excel.ico"
+    role: "Editor"
+  - ext: "xls"
+    name: "Excel 97-2003 Workbook"
+    description: "Workplace Excel Spreadsheet"
+    icon: "../../resources/icons/excel.ico"
+    role: "Editor"
+  - ext: "csv"
+    name: "CSV Document"
+    description: "Workplace Excel Spreadsheet"
+    icon: "../../resources/icons/excel.ico"
+    role: "Editor"
+  - ext: "xltx"
+    name: "Excel Template"
+    description: "Workplace Excel Template"
+    icon: "../../resources/icons/excel.ico"
+    role: "Editor"
+
+  # PowerPoint Presentation Formats
+  - ext: "pptx"
+    name: "PowerPoint Presentation"
+    description: "Workplace PowerPoint Presentation"
+    icon: "../../resources/icons/powerpoint.ico"
+    role: "Editor"
+  - ext: "ppt"
+    name: "PowerPoint 97-2003 Presentation"
+    description: "Workplace PowerPoint Presentation"
+    icon: "../../resources/icons/powerpoint.ico"
+    role: "Editor"
+  - ext: "potx"
+    name: "PowerPoint Template"
+    description: "Workplace PowerPoint Template"
+    icon: "../../resources/icons/powerpoint.ico"
+    role: "Editor"
+
+# NSIS installer config (Windows Setup Wizard)
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  allowElevation: true
+  installerIcon: "../../resources/icons/suite.ico"
+  uninstallerIcon: "../../resources/icons/suite.ico"
+  installerHeaderIcon: "../../resources/icons/suite.ico"
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "Workplace Launcher"
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
+  menuCategory: "Workplace Suite"
+  include: null
+
+# Đừng publish lên github
+publish: null

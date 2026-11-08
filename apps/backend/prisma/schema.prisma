@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ── Users & Identity (Section C) ──────────────────────────────────────────────
+
+model User {
+  id             String    @id @default(uuid()) @map("_id")
+  email          String    @unique
+  passwordHash   String
+  displayName    String?
+  avatarUrl      String?
+  role           Role      @default(USER)
+  isActive       Boolean   @default(true)
+  licenseStatus  String    @default("PENDING")
+  planId         String?
+  approvedAt     DateTime?
+  expiresAt      DateTime?
+  licenseKey     String?
+  issuedBy       String?
+  registeredDeviceFingerprint String?
+  registeredIp   String?
+  lastAutoUninstallAt DateTime?
+  mfaEnabled     Boolean   @default(false)
+  mfaSecret      String?
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  lastLoginAt    DateTime?
+
+  // Relations
+  documents      Document[] @relation("DocumentOwner")
+  collaborations Collaboration[]
+  workspaces     WorkspaceMember[]
+  sessions       Session[]
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model Session {
+  id           String   @id @default(uuid()) @map("_id")
+  userId       String
+  refreshToken String   @unique
+  deviceInfo   String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Workspaces (Section D) ───────────────────────────────────────────────────
+
+model Workspace {
+  id          String   @id @default(uuid()) @map("_id")
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members     WorkspaceMember[]
+  documents   Document[]
+}
+
+model WorkspaceMember {
+  id          String   @id @default(uuid()) @map("_id")
+  workspaceId String
+  userId      String
+  role        WorkspaceRole @default(VIEWER)
+  joinedAt    DateTime @default(now())
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+}
+
+enum WorkspaceRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+// ── Documents (Section D) ────────────────────────────────────────────────────
+
+model Document {
+  id          String   @id @default(uuid()) @map("_id")
+  workspaceId String?
+  ownerId     String
+  title       String
+  type        DocumentType
+  content     Json?    // Optional: for AI embeddings or quick previews
+  fileKey     String?  // Reference to MinIO storage key
+  version     Int      @default(1)
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  owner       User      @relation("DocumentOwner", fields: [ownerId], references: [id])
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+  collaborators Collaboration[]
+}
+
+enum DocumentType {
+  WORD
+  EXCEL
+  POWERPOINT
+}
+
+model Collaboration {
+  id          String   @id @default(uuid()) @map("_id")
+  documentId  String
+  userId      String
+  permission  Permission @default(READ)
+  lastAccessed DateTime? @default(now())
+
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, userId])
+}
+
+enum Permission {
+  READ
+  COMMENT
+  WRITE
+  OWNER
+}

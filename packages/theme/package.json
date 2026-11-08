@@ -1,0 +1,14 @@
+{
+  "name": "@officex/theme",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tailwindcss -i ./src/index.css -o ./dist/index.css && tsc",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

@@ -1,0 +1,17 @@
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+const QUICK_PROMPTS = [
+  { icon: '✨', label: 'Tạo outline', prompt: 'Hãy tạo outline cho một bài thuyết trình chuyên nghiệp 10 slide về kinh doanh.' },
+  { icon: '📝', label: 'Cải thiện tiêu đề', prompt: 'Hãy gợi ý 5 tiêu đề slide hấp dẫn cho bài thuyết trình.' },
+  { icon: '💡', label: 'Ý tưởng nội dung', prompt: 'Hãy gợi ý ý tưởng nội dung cho slide giới thiệu công ty.' },
+  { icon: '🎨', label: 'Tư vấn thiết kế', prompt: 'Hãy tư vấn về màu sắc, font chữ và bố cục slide.' },
+  { icon: '📊', label: 'Nội dung biểu đồ', prompt: 'Hãy gợi ý cách trình bày dữ liệu trên slide hiệu quả.' },
+  { icon: '🗣️', label: 'Lời dẫn', prompt: 'Hãy viết lời dẫn mở đầu bài thuyết trình kinh doanh hấp dẫn.' },
+];

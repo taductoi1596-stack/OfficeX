@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "paths": {
+      "@officex/formula-engine": ["../formula-engine/dist/index.d.ts"]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}
+
