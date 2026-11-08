@@ -10,8 +10,13 @@ build/
 **/build/
 release/
 release-*/
-!RELEASE.md
 *.tsbuildinfo
+
+# Documentation files
+*.md
+**/*.md
+!README.md
+docs/
 
 # Turbo & Cache
 .turbo/
