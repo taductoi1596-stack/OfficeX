@@ -157,3 +157,4 @@ pnpm run package
 ## 📄 Bản quyền (License)
 
 Copyright © 2026 **Workplace Suite**. Phát triển và phân phối bởi team OfficeX.
+

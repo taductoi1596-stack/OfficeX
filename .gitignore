@@ -48,10 +48,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Environment files
-.env
-.env.local
-.env.*.local
+# Environment & Dotenv files (Strictly block all .env and dotenv files everywhere)
+.env*
+*.env*
+**/.env*
+**/*.env*
+*.dotenv*
+**/*.dotenv*
 
 # OS files
 .DS_Store
