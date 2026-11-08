@@ -12,11 +12,27 @@ release/
 release-*/
 *.tsbuildinfo
 
-# Documentation files
+# Documentation & Tests
 *.md
 **/*.md
 !README.md
 docs/
+*.test.*
+*.spec.*
+test_*
+test-*
+tests/
+
+# Temporary screenshots & scratch files
+screenshot*.png
+**/screenshot*.png
+t2_*.png
+t3_*.png
+after-*.png
+**/after-*.png
+take_screenshot.js
+*.txt
+!resources/**
 
 # Turbo & Cache
 .turbo/
